@@ -1,27 +1,19 @@
-/* WAT Rooms — warm "dust" theme.
+/* WAT Rooms — warm "dust" theme (bright).
  *
- * Palette lifted from the Iconic Group site:
- *   dune-mist        #f0ebe6  warm paper
- *   charcoal-espresso #1a1412  warm near-black ink
- *   blueprint-blue   #b4c8dc  soft accent
+ * Palette from the Iconic Group site: dune-mist #f0ebe6 (warm paper),
+ * charcoal-espresso #1a1412 (warm ink), blueprint-blue #b4c8dc (accent).
+ * Primary / accent live in docs.json `colors`.
  *
- * Primary / accent colors live in docs.json `colors`. This file only sets
- * the warm page surfaces the JSON can't express, kept minimal. */
+ * We only tint the overall page a soft, bright warm. The content area is left
+ * untouched (no painted panel), so there is no tinted rectangle behind the docs.
+ */
 
-:root {
-  /* Light mode: warm paper, not the default cool white. */
-  --warm-bg: #f5f1ec;
-  --warm-surface: #f0ebe6;
+/* Light mode: a barely-there warm white across the whole page. */
+body:not(.dark) {
+  background-color: #fbf9f6;
 }
 
-/* Light-mode page background, lifted to warm paper. */
-body:not(.dark),
-body:not(.dark) #content-area {
-  background-color: var(--warm-bg);
-}
-
-/* Dark mode: warm charcoal, not a cold black. */
-.dark body,
-.dark #content-area {
-  background-color: #1a1412;
+/* Dark mode: warm charcoal instead of a cold black. */
+.dark body {
+  background-color: #17120f;
 }
