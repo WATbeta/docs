@@ -4,35 +4,19 @@
   "name": "WAT Rooms",
   "description": "Book WAT meeting rooms from the web app, the wat CLI, or your AI coding agent.",
   "colors": {
-    "primary": "#166E3F",
-    "light": "#26BD6C",
-    "dark": "#166E3F"
+    "primary": "#1a1412",
+    "light": "#b4c8dc",
+    "dark": "#b4c8dc"
   },
   "favicon": "/favicon.ico",
-  "icons": {
-    "library": "lucide"
-  },
-  "styling": {
-    "eyebrows": "breadcrumbs"
-  },
-  "contextual": {
-    "options": ["copy", "view", "assistant", "mcp"]
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
   },
   "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Open the app",
-          "icon": "calendar-check",
-          "href": "https://wat-app.vercel.app"
-        }
-      ]
-    },
     "groups": [
       {
-        "group": "Get started",
-        "icon": "rocket",
-        "expanded": true,
+        "group": "Guides",
         "pages": [
           "index",
           "quickstart",
@@ -40,30 +24,16 @@
         ]
       },
       {
-        "group": "Tools",
-        "icon": "terminal",
-        "expanded": true,
+        "group": "Reference",
         "pages": [
           "cli",
-          "plugin"
-        ]
-      },
-      {
-        "group": "Reference",
-        "icon": "book-open",
-        "expanded": true,
-        "pages": [
+          "plugin",
           "booking-rules"
         ]
       }
     ]
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
   "navbar": {
-    "links": [],
     "primary": {
       "type": "button",
       "label": "Open the app",
