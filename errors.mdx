@@ -1,0 +1,44 @@
+---
+title: "Error codes"
+description: "Every error code the WAT Rooms API and the wat CLI can return, with the HTTP status and what to do next."
+---
+
+The web app, the [`wat` CLI](/cli), and the [skills plugin](/plugin) all hit the same API, so they all surface the same errors. With `--json`, a CLI failure is always the envelope `{ "success": false, "error": { "code": "...", "message": "..." } }` plus the HTTP status.
+
+<Note>
+**Naming convention:** `lower_snake` codes come from the server (the API rejected the request). `UPPER_CASE` codes are synthesized by the CLI itself, before or instead of an API call.
+</Note>
+
+## Booking validation and conflicts (server)
+
+| Code | HTTP | Meaning | What to do next |
+|---|---|---|---|
+| `invalid_range` | 422 | The end time is not strictly after the start time, or a date failed to parse. | Fix the times: end must come after start, in a parseable format such as `2026-06-10T10:00`. |
+| `below_min` | 422 | The booking is shorter than the 15-minute minimum. | Lengthen the booking to at least 15 minutes. |
+| `in_past` | 400 | The booking starts in the past. | Pick a start time in the future. |
+| `beyond_horizon` | 400 | The booking starts more than 30 days ahead. | Pick a date within the 30-day [booking horizon](/booking-rules). |
+| `outside_hours` | 400 | The booking falls outside the opening hours (06:00 to 22:00 Europe/Brussels), or crosses midnight. | Move the booking inside opening hours, on a single Brussels day. |
+| `title_too_long` | 422 | The title exceeds 200 characters. | Shorten the title (it is optional, you can drop it). |
+| `overlap` | 409 | The slot was taken between your availability check and the booking. | Re-check availability and pick another free slot. |
+| `budget` | 409 | The booking would push you past the 2-hour daily budget on some Brussels day. | Shorten the booking, move it to another day, or cancel one of your other bookings that day. |
+| `check` | 422 | The database's own constraints rejected the times (the backstop behind `invalid_range`). | Treat like `invalid_range`: fix the start and end times. |
+
+## Authentication and permissions
+
+| HTTP | CLI code | Meaning | What to do next |
+|---|---|---|---|
+| 401 | `unauthenticated` | No API key, or the key is invalid or revoked. | Run `wat login`, or pass a valid key via `--api-key` / `WAT_CLI_API_KEY`. |
+| 403 | `permission-denied` | The key is valid but the action is not allowed: editing or cancelling someone else's booking, an admin-only action (maintenance blocks, `rooms list --all`), or no active member behind the key. | Stop and tell the user; only the booking's owner or an admin can do this. |
+
+When the server returns an error without a code of its own, the CLI derives one from the HTTP status: `unauthenticated` (401), `permission-denied` (403), `not-found` (404), `conflict` (409), `validation` (422), `internal` (5xx), and `network-error` when no response arrived at all.
+
+## CLI-side codes
+
+These never reach the server: the CLI fails fast locally and exits non-zero.
+
+| Code | Meaning | What to do next |
+|---|---|---|
+| `ROOM_NOT_FOUND` | No active room matches the `--room` name or id. | Run `wat rooms list` and use an exact name or the room id. |
+| `AMBIGUOUS_ROOM` | More than one room shares that name. | Pass the room id instead of the name. |
+| `INVALID_TIME` | A `--start`, `--end`, `--from`, or `--to` value failed to parse. | Use an ISO-style value such as `2026-06-10T10:00`, optionally with `--tz` or an explicit offset. |
+| `MISSING_FLAG` | `wat login --json` needs a flag it did not get (it never prompts in JSON mode). | Pass the missing flag: `--email`, `--code`, or `--signup-code` on first enrollment. |
