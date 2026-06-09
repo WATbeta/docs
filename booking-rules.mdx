@@ -1,6 +1,6 @@
 ---
 title: "Booking rules & features"
-description: "Durations, the daily budget, the booking horizon, privacy, and email notifications."
+description: "Durations, opening hours, the daily budget, the booking horizon, privacy, and email notifications."
 ---
 
 The same rules apply whether you book in the web app, the CLI, or through an agent. They are enforced on the server, so no client can work around them.
@@ -13,6 +13,7 @@ The same rules apply whether you book in the web app, the CLI, or through an age
 | Minimum duration | 15 minutes. |
 | Daily budget | Up to **2 hours** of booking per person per Brussels calendar day. |
 | Booking horizon | Up to **30 days** ahead, never in the past. |
+| Opening hours | Between **06:00 and 22:00** Europe/Brussels, within a single day. Applies when you create or edit a booking; bookings made before this rule existed stay valid, and admin maintenance blocks are exempt. |
 | Edit | Change your own booking until it starts. |
 | Cancel | Cancel your own booking until it ends, so an in-progress booking you no longer need frees the room. |
 | Privacy | Others see your **name** on a booking, never its **title**. Only you and admins see the title. |
@@ -31,7 +32,7 @@ The daily budget counts only your **active** bookings. Cancel one and that time 
 | Update notice | When an admin moves your booking | The new time |
 | Reminder | Shortly before the booking starts | The upcoming booking's details |
 
-You control confirmation emails, reminder emails, and how far ahead the reminder arrives in **Account → settings** in the web app.
+You control confirmation emails, reminder emails, and how far ahead the reminder arrives on the **Notifications** tab of the **Account** page in the web app. The **API keys** tab on the same page manages the keys your CLI and agents use.
 
 ## Admins
 

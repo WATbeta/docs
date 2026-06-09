@@ -34,10 +34,10 @@ wat login
 |---|---|---|
 | `wat:list-rooms` | Lists the meeting rooms with capacity and description. | "What rooms can I book?" |
 | `wat:check-availability` | Resolves a room and time window, then summarizes the free slots. | "Is Room A free tomorrow afternoon?" |
-| `wat:book-room` | Creates a booking, surfacing slot conflicts and the daily budget cleanly. | "Book Room A tomorrow 10:00 to 11:00." |
+| `wat:book-room` | Creates a booking, surfacing slot conflicts, the daily budget, and out-of-hours requests (the API rejects times outside 06:00 to 22:00 Europe/Brussels with `outside_hours`) cleanly. | "Book Room A tomorrow 10:00 to 11:00." |
 | `wat:my-bookings` | Lists your own bookings and cancels one by id. | "Show my bookings and cancel the 3pm one." |
 
-Each skill calls the CLI with `--json` and parses the result, so successes and errors are handled deterministically. Booking and cancelling cause real changes, so a well-behaved agent confirms ambiguous requests before acting.
+Each skill calls the CLI with `--json` and parses the result, so successes and errors are handled deterministically. The full list of failure codes a skill can surface is on the [Error codes](/errors) page. Booking and cancelling cause real changes, so a well-behaved agent confirms ambiguous requests before acting.
 
 ## Environment targeting
 
