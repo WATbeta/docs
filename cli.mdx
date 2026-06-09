@@ -42,7 +42,25 @@ wat whoami    # confirm who you're logged in as, and your role
 wat logout    # remove the local key (add --all to clear every profile)
 ```
 
-To revoke a key everywhere (not just locally), use **Account → API keys** in the [web app](/account).
+To revoke a key everywhere (not just locally), run `wat keys revoke <id>` or use the **API keys** tab on the **Account** page in the [web app](/account).
+
+### Non-interactive login
+
+Every prompt has a flag, so scripts and agents can log in without a TTY:
+
+```bash
+wat login --email you@example.com --code 123456 --key-name "ci-agent"
+```
+
+| Flag | What it does |
+|---|---|
+| `--email <email>` | The account email (otherwise prompted). |
+| `--code <code>` | The 6-digit code from the login email (otherwise prompted). |
+| `--signup-code <code>` | The WAT signup code, required on first enrollment only. |
+| `--profile-name <name>` | Name for the local profile (auto-derived if omitted). |
+| `--key-name <name>` | Human-readable name for the minted API key. |
+
+With `--json`, `wat login` never prompts: a missing required flag fails fast with a structured `MISSING_FLAG` error instead of hanging on input. See [Error codes](/errors).
 
 ## Command reference
 
@@ -51,6 +69,9 @@ To revoke a key everywhere (not just locally), use **Account → API keys** in t
 ```bash Rooms
 # List the active meeting rooms with capacity + description + id
 wat rooms list
+
+# Admins: include archived rooms too
+wat rooms list --all
 ```
 
 ```bash Availability
@@ -62,23 +83,46 @@ wat availability --room "Room A" --from "2026-06-10T09:00" --to "2026-06-10T18:0
 ```
 
 ```bash Bookings
-# List all bookings, or just your own
+# List bookings (newest first, 50 by default), or just your own
 wat bookings list
+wat bookings list --limit 100
 wat bookings list --mine
 wat bookings list --room "Room A" --from 2026-06-10 --to 2026-06-11
 
 # Create a booking (title is optional; only you + admins see it)
 wat bookings create --room "Room A" --start "2026-06-10T10:00" --end "2026-06-10T11:00" --title "Sync"
 
+# Edit your own booking before it starts (pass any subset of flags)
+wat bookings edit <id> --start "2026-06-10T11:00" --end "2026-06-10T12:00"
+wat bookings edit <id> --room "Room B" --title "Moved sync"
+
 # Cancel a booking by id
 wat bookings cancel <id>
+```
+
+```bash API keys
+# List your API keys (name, prefix, created, last used)
+wat keys list
+
+# Revoke a key everywhere, not just locally
+wat keys revoke <id>
+```
+
+```bash Config
+# Show profiles plus the resolved base URL and API-key source
+wat config show
+
+# Remove the entire local config file (all profiles)
+wat config clear
 ```
 
 </CodeGroup>
 
 You can pass `--room` either a room name (case-insensitive) or a room id. Run `wat rooms list` to see both.
 
-Every command accepts `--json` for machine-readable output. The skills plugin relies on this; the envelope is `{ "success": true, "data": { ... } }` or `{ "success": false, "error": { ... } }`.
+Availability is clipped to the [opening hours](/booking-rules) (06:00 to 22:00 Europe/Brussels): time outside them never shows as free, and creating or editing a booking outside them is rejected with `outside_hours`.
+
+Every command accepts `--json` for machine-readable output. The skills plugin relies on this; the envelope is `{ "success": true, "data": { ... } }` or `{ "success": false, "error": { ... } }`. The codes you can get back are listed on the [Error codes](/errors) page.
 
 ## Choosing the environment
 
@@ -88,6 +132,20 @@ The CLI defaults to **production** (`https://wat-app.vercel.app`). Pass `--env d
 wat --env dev rooms list     # staging / development data
 wat --env prod rooms list    # production (the default)
 ```
+
+### Overrides and precedence
+
+Any command also takes a per-call `--api-key <key>` and `--api-url <url>`, and three environment variables cover scripted use: `WAT_CLI_ENV` (`dev` or `prod`), `WAT_CLI_API_KEY`, and `WAT_CLI_API_BASE_URL`.
+
+The base URL resolves in this order (highest wins):
+
+1. The `--api-url` flag
+2. `WAT_CLI_API_BASE_URL`
+3. The active profile's stored base URL
+4. `--env dev|prod`, or `WAT_CLI_ENV`
+5. The production default
+
+The API key resolves as `--api-key`, then `WAT_CLI_API_KEY`, then the active profile. Run `wat config show` to see exactly which source each one resolved from.
 
 ## Time and time zones
 
