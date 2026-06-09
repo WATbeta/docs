@@ -5,7 +5,7 @@ The docs for WAT Rooms, the meeting-room booking app for the WAT community. Buil
 ## What this documents
 
 - The web app at `https://wat-app.vercel.app`.
-- The `wat` CLI (repo `WATbeta/wat-cli`, package `@wat/wat`, command `wat`).
+- The `wat` CLI (repo `WATbeta/wat-cli`, package `@wat-toolbox/wat`, command `wat`).
 - The `wat` skills plugin (repo `WATbeta/wat-plugin`) for AI coding agents.
 
 The CLI and the skills are the source of truth for commands and flags. When they change, update `cli.mdx` and `plugin.mdx` to match.
@@ -13,7 +13,7 @@ The CLI and the skills are the source of truth for commands and flags. When they
 ## Hard rules
 
 - **Never put the WAT signup code value in the docs.** It is secret. Say "ask a WAT admin for it".
-- The CLI is published to npm as `@wat/wat`. Document install as `npm install -g @wat/wat` (global, needed for the skills plugin which calls `wat`) or `npx @wat/wat …` for one-off commands. Do NOT document a clone/build/link from-source flow.
+- The CLI is published to npm as `@wat-toolbox/wat`. Document install as `npm install -g @wat-toolbox/wat` (global, needed for the skills plugin which calls `wat`) or `npx @wat-toolbox/wat …` for one-off commands. Do NOT document a clone/build/link from-source flow.
 - Do not document the staging URL as a user URL; reference it only via `--env dev`.
 
 ## Style

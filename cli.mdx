@@ -3,14 +3,14 @@ title: "The wat CLI"
 description: "Book WAT rooms from the terminal. Install, log in, and the full command reference."
 ---
 
-`wat` is a small command-line tool that books WAT rooms by driving the same public API the web app uses. The command is `wat`; the package is `@wat/wat`.
+`wat` is a small command-line tool that books WAT rooms by driving the same public API the web app uses. The command is `wat`; the package is `@wat-toolbox/wat`.
 
 ## Install
 
 Install the CLI globally so the `wat` command is on your PATH. The skills plugin shells out to `wat`, so a global install is what you want for agent use:
 
 ```bash
-npm install -g @wat/wat
+npm install -g @wat-toolbox/wat
 ```
 
 Verify:
@@ -22,11 +22,11 @@ wat --version
 Prefer not to install anything? Run any command on demand with `npx`:
 
 ```bash
-npx @wat/wat rooms list
+npx @wat-toolbox/wat rooms list
 ```
 
 <Note>
-For the skills plugin (and any agent that calls `wat`), install globally with `-g` so the command is on the PATH. Use `npx @wat/wat …` only for quick one-off commands.
+For the skills plugin (and any agent that calls `wat`), install globally with `-g` so the command is on the PATH. Use `npx @wat-toolbox/wat …` only for quick one-off commands.
 </Note>
 
 ## Log in
