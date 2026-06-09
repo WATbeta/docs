@@ -7,16 +7,10 @@ description: "Book WAT rooms from the terminal. Install, log in, and the full co
 
 ## Install
 
-<Note>
-`@wat/wat` is not published to public npm yet, so `npm install -g @wat/wat` will not resolve. Install from source: clone, build, and link the command.
-</Note>
+Install the CLI globally so the `wat` command is on your PATH. The skills plugin shells out to `wat`, so a global install is what you want for agent use:
 
 ```bash
-git clone https://github.com/WATbeta/wat-cli.git
-cd wat-cli
-npm install
-npm run build
-npm link
+npm install -g @wat/wat
 ```
 
 Verify:
@@ -25,7 +19,15 @@ Verify:
 wat --version
 ```
 
-`npm link` puts the `wat` command on your PATH from the local build. To update later, `git pull` in the clone and re-run `npm run build`.
+Prefer not to install anything? Run any command on demand with `npx`:
+
+```bash
+npx @wat/wat rooms list
+```
+
+<Note>
+For the skills plugin (and any agent that calls `wat`), install globally with `-g` so the command is on the PATH. Use `npx @wat/wat …` only for quick one-off commands.
+</Note>
 
 ## Log in
 

@@ -13,7 +13,7 @@ The CLI and the skills are the source of truth for commands and flags. When they
 ## Hard rules
 
 - **Never put the WAT signup code value in the docs.** It is secret. Say "ask a WAT admin for it".
-- Do not document `npm install -g @wat/wat`: it is not published to public npm. The verified install is clone, then `npm install && npm run build && npm link`.
+- The CLI is published to npm as `@wat/wat`. Document install as `npm install -g @wat/wat` (global, needed for the skills plugin which calls `wat`) or `npx @wat/wat …` for one-off commands. Do NOT document a clone/build/link from-source flow.
 - Do not document the staging URL as a user URL; reference it only via `--env dev`.
 
 ## Style

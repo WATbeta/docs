@@ -11,14 +11,10 @@ This is the fast path. In four steps you give an AI coding agent (Claude Code, C
 
 <Steps>
   <Step title="Install the wat CLI">
-    The CLI is not on public npm yet. Clone the repo, build it, and link the `wat` command:
+    Install it globally so the `wat` command is on your PATH (the skills call it):
 
     ```bash
-    git clone https://github.com/WATbeta/wat-cli.git
-    cd wat-cli
-    npm install
-    npm run build
-    npm link
+    npm install -g @wat/wat
     ```
 
     Check it works:
@@ -74,10 +70,10 @@ Paste this into your agent to set everything up in one go:
 
 ```text
 Read https://watbeta.github.io/docs (the WAT Rooms docs), then:
-1. Install the wat CLI: clone https://github.com/WATbeta/wat-cli, run npm install && npm run build && npm link.
-2. Install the skills: npx plugins add WATbeta/wat-plugin.
+1. Install the wat CLI: npm install -g @wat/wat
+2. Install the skills: npx plugins add WATbeta/wat-plugin
 3. Run `wat login` (I'll enter the email code and, if asked, the WAT signup code).
-4. Book me Room A tomorrow 10:00–11:00.
+4. Book me Room A tomorrow from 10:00 to 11:00.
 ```
 
 <Note>
