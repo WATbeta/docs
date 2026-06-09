@@ -1,0 +1,96 @@
+---
+title: "Quickstart for agents"
+description: "Install the wat CLI and skills, log in once, then ask your agent to book a room."
+---
+
+This is the fast path. In four steps you give an AI coding agent (Claude Code, Codex, …) the ability to book WAT rooms for you in plain language.
+
+<Note>
+**Prerequisites:** Node.js 20 or higher, and a WAT account. No account yet? See [Create an account](/account). First-time login also needs the **WAT signup code** (ask a WAT admin for it).
+</Note>
+
+<Steps>
+  <Step title="Install the wat CLI">
+    The CLI is not on public npm yet. Clone the repo, build it, and link the `wat` command:
+
+    ```bash
+    git clone https://github.com/WATbeta/wat-cli.git
+    cd wat-cli
+    npm install
+    npm run build
+    npm link
+    ```
+
+    Check it works:
+
+    ```bash
+    wat --version
+    ```
+  </Step>
+
+  <Step title="Install the skills plugin">
+    The skills wrap the CLI so your agent can book rooms conversationally.
+
+    ```bash
+    npx plugins add WATbeta/wat-plugin
+    ```
+
+    In Claude Code you can use the native form instead:
+
+    ```
+    /plugin marketplace add WATbeta/wat-plugin
+    /plugin install wat@wat-plugin
+    ```
+
+    The skills surface as `/wat:list-rooms`, `/wat:check-availability`, `/wat:book-room`, and `/wat:my-bookings`.
+  </Step>
+
+  <Step title="Log in">
+    Run `wat login` once. It sends a 6-digit code to your email, and on your **first** login also asks for the WAT signup code.
+
+    ```bash
+    wat login
+    ```
+
+    The CLI mints an API key and stores it locally (`~/.config/wat/config.json`, mode 0600). The skills reuse this stored key, so you authenticate once. Confirm with:
+
+    ```bash
+    wat whoami
+    ```
+  </Step>
+
+  <Step title="Ask your agent to book a room">
+    With the CLI logged in and the skills installed, just ask in natural language:
+
+    > Book me Room A tomorrow from 10:00 to 11:00.
+
+    The agent resolves the room, checks availability, and creates the booking through the `wat:book-room` skill.
+  </Step>
+</Steps>
+
+## Hand this to your agent
+
+Paste this into your agent to set everything up in one go:
+
+```text
+Read https://watbeta.github.io/docs (the WAT Rooms docs), then:
+1. Install the wat CLI: clone https://github.com/WATbeta/wat-cli, run npm install && npm run build && npm link.
+2. Install the skills: npx plugins add WATbeta/wat-plugin.
+3. Run `wat login` (I'll enter the email code and, if asked, the WAT signup code).
+4. Book me Room A tomorrow 10:00–11:00.
+```
+
+<Note>
+Replace the docs URL above with wherever this site is published. The signup code is a secret: an admin gives it to you, you type it into `wat login` once. Never paste it into a shared prompt or commit it.
+</Note>
+
+## What's next
+
+<CardGroup cols={2}>
+  <Card title="The wat CLI" icon="terminal" href="/cli">
+    Every command and flag, with copy-paste examples.
+  </Card>
+  <Card title="Booking rules" icon="book-open" href="/booking-rules">
+    Durations, the 2-hour daily budget, the booking horizon, and more.
+  </Card>
+</CardGroup>

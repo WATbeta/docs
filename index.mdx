@@ -1,134 +1,45 @@
 ---
-title: Home
-description: Everything you need to set up, configure, and get the most out of Platform, Analytics, and Integrations tools.
-mode: frame
+title: "WAT Rooms"
+description: "Book WAT meeting rooms in seconds, from the web app, the terminal, or your AI coding agent."
 ---
 
-<div data-product-guide-index className="flex w-full flex-col gap-8 max-w-5xl mx-auto px-4 md:px-8 lg:px-12 py-10 lg:gap-14 lg:py-16">
-  <div className="flex max-w-[540px] flex-col gap-2 self-center text-center">
-    <h1 className="text-[30px] font-medium leading-9 tracking-tight text-gray-900 dark:text-gray-50">
-      Product Guide
-    </h1>
-    <p className="text-balance text-base leading-relaxed tracking-tight text-gray-600 dark:text-gray-400">
-      Everything you need to set up, configure, and get the most out of Platform, Analytics, and Integrations tools.
-    </p>
-  </div>
+WAT Rooms is the booking app for the WAT community's meeting rooms. See live availability, reserve a free time slot, and manage your own bookings.
 
-  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-    <Card
-      title={<span className="product-guide-feature-card-title">Platform overview</span>}
-      icon="chart-no-axes-gantt"
-      href="/platform"
-      className="product-guide-feature-card"
-      size={64}
-    >
-      <span className="product-guide-feature-card-description">Setup, configure, and manage your workspace.</span>
-    </Card>
+There is a web app at [wat-app.vercel.app](https://wat-app.vercel.app), but WAT Rooms is built to be driven by **AI coding agents** (Claude Code, Codex, and friends). A small `wat` CLI exposes the same API the web app uses, and a skills plugin lets your agent book rooms conversationally.
 
-    <a
-      href="/analytics"
-      className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-    >
-      <Icon icon="chart-column" color="rgb(var(--primary))" size={18} className="shrink-0" />
-      <div className="flex flex-col gap-1">
-        <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Analytics</span>
-        <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-          Build, report, and visualize your data.
-        </span>
-      </div>
-    </a>
-    <a
-      href="/integrations"
-      className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-    >
-      <Icon icon="code-xml" color="rgb(var(--primary))" size={18} className="shrink-0" />
-      <div className="flex flex-col gap-1">
-        <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Integrations</span>
-        <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-          Ready-to-use connectors for common platforms and flexible webhooks.
-        </span>
-      </div>
-    </a>
-  </div>
+<Note>
+**For agents:** the fastest path is the [Quickstart for agents](/quickstart). Install the `wat` CLI, install the `wat` skills plugin, run `wat login` once, then just ask your agent to book a room. Everything after the login step happens in natural language.
+</Note>
 
-  <hr className="border-0 border-t border-border" />
+## Pick your path
 
-  <div className="flex flex-col gap-4">
-    <h2 className="font-serif text-xl font-medium leading-normal text-gray-900 dark:text-gray-50">Common tasks</h2>
+<CardGroup cols={2}>
+  <Card title="Quickstart for agents" icon="wand-sparkles" href="/quickstart">
+    Install the CLI and skills, log in, and have your agent book a room.
+  </Card>
+  <Card title="Create an account" icon="user-plus" href="/account">
+    Self-enroll with your email and the WAT signup code. Passwordless.
+  </Card>
+  <Card title="The wat CLI" icon="terminal" href="/cli">
+    Install the CLI and the full command reference: rooms, availability, bookings.
+  </Card>
+  <Card title="Skills plugin" icon="puzzle" href="/plugin">
+    The four `wat:` skills your agent uses to book rooms in plain language.
+  </Card>
+  <Card title="Booking rules" icon="book-open" href="/booking-rules">
+    Durations, the daily budget, the booking horizon, privacy, and emails.
+  </Card>
+  <Card title="Open the app" icon="calendar-check" href="https://wat-app.vercel.app">
+    The web app: a calendar view of every room, with one-click booking.
+  </Card>
+</CardGroup>
 
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <a
-        href="/platform/configuration/user-management"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="users" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Manage your team</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Add members, assign roles, and control access across your workspace.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/analytics/connect-data"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="database" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Connect a data source</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Link a database, data warehouse, or third-party data provider.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/integrations/connectors/crm"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="building-2" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Connect your CRM</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Sync your CRM through native connectors or a custom strategy.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/analytics/dashboards/create-dashboard"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="layout-dashboard" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Build a dashboard</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Add charts, set filters, and share a live dashboard.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/integrations/webhooks/configure"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="webhook" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Set up a webhook</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Subscribe to events and route them to any endpoint.
-          </span>
-        </div>
-      </a>
-      <a
-        href="/analytics/reports/scheduled-reports"
-        className="rounded-2xl flex flex-col gap-4 border bg-gray-50 p-4 outline-none shadow-sm shadow-gray-950/5 transition hover:border-primary hover:shadow-md dark:bg-gray-950 dark:shadow-black/20 dark:hover:border-primary"
-      >
-        <Icon icon="calendar-clock" color="rgb(var(--primary))" size={18} className="shrink-0" />
-        <div className="flex flex-col gap-1">
-          <span className="font-serif text-base font-medium text-gray-900 dark:text-gray-50">Schedule a report</span>
-          <span className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
-            Send recurring snapshots via email or Slack.
-          </span>
-        </div>
-      </a>
-    </div>
-  </div>
-</div>
+## How it fits together
+
+One account works everywhere. You sign up once in the web app, mint an API key, and the same identity drives the web app, the `wat` CLI, and the skills plugin.
+
+- **Web app:** a calendar with one column per room, point and click to book.
+- **`wat` CLI:** book from the terminal, scriptable, machine-readable with `--json`.
+- **Skills plugin:** thin wrappers over the CLI so an agent can book for you in natural language.
+
+The CLI and the skills call the **same** public API the web app uses, so every rule (availability, your daily budget, privacy) is enforced identically no matter how you book.

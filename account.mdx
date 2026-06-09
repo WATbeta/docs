@@ -1,0 +1,42 @@
+---
+title: "Create an account"
+description: "Self-enroll with your email and the WAT signup code. One passwordless account works everywhere."
+---
+
+WAT Rooms is self-service. You sign yourself up, no admin invite needed. Accounts are passwordless: you log in with a code sent to your email.
+
+## Sign up
+
+<Steps>
+  <Step title="Open the app">
+    Go to [wat-app.vercel.app](https://wat-app.vercel.app) and choose to log in.
+  </Step>
+  <Step title="Enter your email">
+    Type your email address. We send you a 6-digit one-time code.
+  </Step>
+  <Step title="Enter the code, plus the signup code on first sign-up">
+    Enter the 6-digit code from your email. The **first** time you ever sign up, you also enter the **WAT signup code**.
+
+    <Note>
+    The WAT signup code is shared and secret. Ask a WAT admin for it. You only need it on your first enrollment; after that, email plus the 6-digit code is all it takes to log in.
+    </Note>
+  </Step>
+  <Step title="You're in">
+    Your account is created as a member. You can now see the rooms and book them. Returning members skip the signup code and just log in with email plus the 6-digit code.
+  </Step>
+</Steps>
+
+## One account, everywhere
+
+The same account drives the web app, the [`wat` CLI](/cli), and the [skills plugin](/plugin). There is nothing to re-register: log in once per tool.
+
+## Mint an API key for the CLI and agents
+
+The CLI and the skills authenticate with an API key tied to your account.
+
+- The easiest way is `wat login`, which mints and stores a key for you automatically (see the [CLI page](/cli)).
+- You can also mint and revoke keys yourself in the web app under **Account → API keys**. Use this to issue a dedicated key for an agent or a script, or to revoke a key you no longer trust.
+
+<Note>
+Treat an API key like a password: it carries your member role. Store it only where it's needed and revoke it from **Account → API keys** if it leaks.
+</Note>

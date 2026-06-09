@@ -1,0 +1,38 @@
+---
+title: "Booking rules & features"
+description: "Durations, the daily budget, the booking horizon, privacy, and email notifications."
+---
+
+The same rules apply whether you book in the web app, the CLI, or through an agent. They are enforced on the server, so no client can work around them.
+
+## The rules
+
+| Rule | What it means |
+|---|---|
+| Time model | Book any free time range, in 15-minute steps. |
+| Minimum duration | 15 minutes. |
+| Daily budget | Up to **2 hours** of booking per person per Brussels calendar day. |
+| Booking horizon | Up to **30 days** ahead, never in the past. |
+| Edit | Change your own booking until it starts. |
+| Cancel | Cancel your own booking until it ends, so an in-progress booking you no longer need frees the room. |
+| Privacy | Others see your **name** on a booking, never its **title**. Only you and admins see the title. |
+
+<Note>
+The daily budget counts only your **active** bookings. Cancel one and that time frees up again for the day.
+</Note>
+
+## Email notifications
+
+| Email | When | Includes |
+|---|---|---|
+| Login code | Each time you log in | The 6-digit one-time code |
+| Booking confirmation | When you create a booking | A calendar invite (`.ics`) so you can add it to your own calendar |
+| Cancellation notice | When a booking is cancelled, including by an admin | The cancelled booking's details |
+| Update notice | When an admin moves your booking | The new time |
+| Reminder | Shortly before the booking starts | The upcoming booking's details |
+
+You control confirmation emails, reminder emails, and how far ahead the reminder arrives in **Account → settings** in the web app.
+
+## Admins
+
+WAT admins manage everything in the web app: they create, edit, and archive rooms, block rooms for maintenance (these show as "Unavailable" on the calendar), view or cancel any booking, and manage members. Maintenance blocks are exempt from the daily budget. Most members never need the admin area.

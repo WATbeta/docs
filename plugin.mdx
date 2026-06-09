@@ -1,0 +1,48 @@
+---
+title: "Skills plugin"
+description: "Four wat skills that let your AI agent book rooms in plain language."
+---
+
+The `wat` skills plugin lets an AI coding agent (Claude Code, Cursor, and other Open-Plugin hosts) book WAT rooms conversationally. The skills are thin wrappers over the [`wat` CLI](/cli), so they inherit its auth and environment targeting and hold no secrets of their own.
+
+## Install
+
+```bash
+npx plugins add WATbeta/wat-plugin
+```
+
+In Claude Code you can use the native form instead:
+
+```
+/plugin marketplace add WATbeta/wat-plugin
+/plugin install wat@wat-plugin
+```
+
+## Prerequisite: log in with the CLI first
+
+The skills shell out to the `wat` CLI, so install the CLI and log in once before using them:
+
+```bash
+wat login
+```
+
+`wat login` mints and stores an API key locally. The plugin inherits that stored key, so every skill reuses your login. See the [CLI page](/cli) for the install steps.
+
+## The four skills
+
+| Skill | What it does | Ask your agent |
+|---|---|---|
+| `wat:list-rooms` | Lists the meeting rooms with capacity and description. | "What rooms can I book?" |
+| `wat:check-availability` | Resolves a room and time window, then summarizes the free slots. | "Is Room A free tomorrow afternoon?" |
+| `wat:book-room` | Creates a booking, surfacing slot conflicts and the daily budget cleanly. | "Book Room A tomorrow 10:00 to 11:00." |
+| `wat:my-bookings` | Lists your own bookings and cancels one by id. | "Show my bookings and cancel the 3pm one." |
+
+Each skill calls the CLI with `--json` and parses the result, so successes and errors are handled deterministically. Booking and cancelling cause real changes, so a well-behaved agent confirms ambiguous requests before acting.
+
+## Environment targeting
+
+Like the CLI, the skills default to **production**. They pass `--env dev` only when you explicitly ask for the staging or development environment, so a casual "book Room A" never touches development data.
+
+## Time zones
+
+Bare times you mention are read as **Europe/Brussels** wall-clock, matching the web app. Mention another zone (or an explicit offset) and the agent passes it through to the CLI.

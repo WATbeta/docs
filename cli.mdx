@@ -1,0 +1,96 @@
+---
+title: "The wat CLI"
+description: "Book WAT rooms from the terminal. Install, log in, and the full command reference."
+---
+
+`wat` is a small command-line tool that books WAT rooms by driving the same public API the web app uses. The command is `wat`; the package is `@wat/wat`.
+
+## Install
+
+<Note>
+`@wat/wat` is not published to public npm yet, so `npm install -g @wat/wat` will not resolve. Install from source: clone, build, and link the command.
+</Note>
+
+```bash
+git clone https://github.com/WATbeta/wat-cli.git
+cd wat-cli
+npm install
+npm run build
+npm link
+```
+
+Verify:
+
+```bash
+wat --version
+```
+
+`npm link` puts the `wat` command on your PATH from the local build. To update later, `git pull` in the clone and re-run `npm run build`.
+
+## Log in
+
+```bash
+wat login
+```
+
+This runs an email one-time-password flow: it sends a 6-digit code to your email and prompts for it. On your **first** login it also asks for the WAT signup code (ask a WAT admin for it). It then mints an API key and stores it as your active profile in `~/.config/wat/config.json` (mode 0600). Every later command reuses this key.
+
+```bash
+wat whoami    # confirm who you're logged in as, and your role
+wat logout    # remove the local key (add --all to clear every profile)
+```
+
+To revoke a key everywhere (not just locally), use **Account → API keys** in the [web app](/account).
+
+## Command reference
+
+<CodeGroup>
+
+```bash Rooms
+# List the active meeting rooms with capacity + description + id
+wat rooms list
+```
+
+```bash Availability
+# Free time ranges for a room over a window
+wat availability --room "Room A" --from 2026-06-10 --to 2026-06-11
+
+# Read bare times in another zone
+wat availability --room "Room A" --from "2026-06-10T09:00" --to "2026-06-10T18:00" --tz America/New_York
+```
+
+```bash Bookings
+# List all bookings, or just your own
+wat bookings list
+wat bookings list --mine
+wat bookings list --room "Room A" --from 2026-06-10 --to 2026-06-11
+
+# Create a booking (title is optional; only you + admins see it)
+wat bookings create --room "Room A" --start "2026-06-10T10:00" --end "2026-06-10T11:00" --title "Sync"
+
+# Cancel a booking by id
+wat bookings cancel <id>
+```
+
+</CodeGroup>
+
+You can pass `--room` either a room name (case-insensitive) or a room id. Run `wat rooms list` to see both.
+
+Every command accepts `--json` for machine-readable output. The skills plugin relies on this; the envelope is `{ "success": true, "data": { ... } }` or `{ "success": false, "error": { ... } }`.
+
+## Choosing the environment
+
+The CLI defaults to **production** (`https://wat-app.vercel.app`). Pass `--env dev` to target the staging deployment, which reads development data. Use it only when you mean to.
+
+```bash
+wat --env dev rooms list     # staging / development data
+wat --env prod rooms list    # production (the default)
+```
+
+## Time and time zones
+
+Bare datetimes such as `2026-06-10T10:00` are read as **Europe/Brussels** wall-clock, matching the web app, then converted to UTC for the API. Pass `--tz <IANA>` to read bare times in another zone, or include an explicit offset (`2026-06-10T10:00+02:00`) to pin the exact instant. Times are printed back in the same zone you gave, so what you type and what you see always agree.
+
+<Note>
+Need to book conversationally instead of by hand? Install the [skills plugin](/plugin) and ask your agent. The skills wrap these same commands.
+</Note>

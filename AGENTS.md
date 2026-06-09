@@ -1,33 +1,23 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
+# WAT Rooms documentation
 
-# Documentation project instructions
+The docs for WAT Rooms, the meeting-room booking app for the WAT community. Built on [Mintlify](https://mintlify.com): pages are MDX with YAML frontmatter, configured in `docs.json`. Run `mint dev` to preview, `mint broken-links` to check links.
 
-## About this project
+## What this documents
 
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Run `mint dev` to preview locally
-- Run `mint broken-links` to check links
+- The web app at `https://wat-app.vercel.app`.
+- The `wat` CLI (repo `WATbeta/wat-cli`, package `@wat/wat`, command `wat`).
+- The `wat` skills plugin (repo `WATbeta/wat-plugin`) for AI coding agents.
 
-## Terminology
+The CLI and the skills are the source of truth for commands and flags. When they change, update `cli.mdx` and `plugin.mdx` to match.
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+## Hard rules
 
-## Style preferences
+- **Never put the WAT signup code value in the docs.** It is secret. Say "ask a WAT admin for it".
+- Do not document `npm install -g @wat/wat`: it is not published to public npm. The verified install is clone, then `npm install && npm run build && npm link`.
+- Do not document the staging URL as a user URL; reference it only via `--env dev`.
 
-{/* Add any project-specific style rules below */}
+## Style
 
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
-
-## Content boundaries
-
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- Active voice, second person ("you"), sentence case headings.
+- Bold for UI elements (Click **Settings**), code formatting for commands, paths, file names.
+- Do not use " - " or " — " as separators in sentences. Use commas, colons, or restructure.
