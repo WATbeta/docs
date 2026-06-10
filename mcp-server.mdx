@@ -6,21 +6,21 @@ description: "Connect WAT Rooms to claude.ai, Claude Desktop, or any MCP host. N
 The WAT Rooms MCP server lets any Model Context Protocol host book rooms for you. Unlike the [CLI](/cli) and [skills plugin](/plugin), it needs **no installation and no terminal**: you add one URL to your AI app, sign in with your WAT email code, and the booking tools appear in chat.
 
 ```
-https://wat-mcp.vercel.app/mcp
+https://mcp.wat.com/mcp
 ```
 
 ## Connect
 
 <Tabs>
   <Tab title="claude.ai">
-    Settings → **Connectors** → **Add custom connector** → paste `https://wat-mcp.vercel.app/mcp` → **Add**. Click **Connect** and follow the sign-in.
+    Settings → **Connectors** → **Add custom connector** → paste `https://mcp.wat.com/mcp` → **Add**. Click **Connect** and follow the sign-in.
   </Tab>
   <Tab title="Claude Desktop">
-    Settings → **Connectors** → **Add custom connector** → paste `https://wat-mcp.vercel.app/mcp`. Connect and follow the sign-in.
+    Settings → **Connectors** → **Add custom connector** → paste `https://mcp.wat.com/mcp`. Connect and follow the sign-in.
   </Tab>
   <Tab title="Claude Code">
     ```bash
-    claude mcp add --transport http wat https://wat-mcp.vercel.app/mcp
+    claude mcp add --transport http wat https://mcp.wat.com/mcp
     ```
     Then run `/mcp` in a session to authenticate.
   </Tab>

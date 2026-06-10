@@ -46,7 +46,7 @@
     "primary": {
       "type": "button",
       "label": "Open the app",
-      "href": "https://wat-app.vercel.app"
+      "href": "https://app.wat.com"
     }
   },
   "footer": {

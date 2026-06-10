@@ -4,7 +4,7 @@ The docs for WAT Rooms, the meeting-room booking app for the WAT community. Buil
 
 ## What this documents
 
-- The web app at `https://wat-app.vercel.app`.
+- The web app at `https://app.wat.com`.
 - The `wat` CLI (repo `WATbeta/wat-cli`, package `@wat-toolbox/wat`, command `wat`).
 - The `wat` skills plugin (repo `WATbeta/wat-plugin`) for AI coding agents.
 
