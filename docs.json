@@ -35,7 +35,7 @@
         "pages": [
           "cli",
           "plugin",
-          "mcp",
+          "mcp-server",
           "booking-rules",
           "errors"
         ]

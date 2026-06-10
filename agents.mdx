@@ -6,7 +6,11 @@ description: "You are an AI agent asked to book a WAT room. Follow this recipe t
 This page is written for **you, the agent**. A human has asked you to book (or check, move, cancel) a WAT meeting room. Everything below works with zero installation via `npx`, returns machine-readable JSON, and tells you exactly when you must stop and ask your human.
 
 <Note>
-No Node.js? You need Node 20+ for `npx`. If the environment has no Node at all, tell your human to use the web app at [wat-app.vercel.app](https://wat-app.vercel.app) instead.
+**Already have WAT Rooms MCP tools?** If your host has the WAT Rooms connector attached, you will see tools named `list_rooms`, `check_availability`, `create_booking`, and friends: use those directly and skip this entire shell recipe. The same booking rules and confirm-before-mutating etiquette apply; see the [MCP server page](/mcp-server).
+</Note>
+
+<Note>
+No Node.js? You need Node 20+ for `npx`. If the environment has no shell or no Node at all, tell your human to connect the [MCP server](/mcp-server) (works in claude.ai and Claude Desktop, zero install) or use the web app at [wat-app.vercel.app](https://wat-app.vercel.app).
 </Note>
 
 ## 0. The one command you need

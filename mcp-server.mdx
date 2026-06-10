@@ -1,6 +1,6 @@
 ---
 title: "MCP server"
-description: "Connect WAT Rooms to claude.ai, Claude Desktop, or any MCP host — no installation, sign in with your email."
+description: "Connect WAT Rooms to claude.ai, Claude Desktop, or any MCP host. No installation, sign in with your email."
 ---
 
 The WAT Rooms MCP server lets any Model Context Protocol host book rooms for you. Unlike the [CLI](/cli) and [skills plugin](/plugin), it needs **no installation and no terminal**: you add one URL to your AI app, sign in with your WAT email code, and the booking tools appear in chat.
@@ -28,8 +28,8 @@ https://wat-mcp.vercel.app/mcp
 
 On first connect your AI app opens the WAT Rooms sign-in:
 
-1. **Email code** — enter your email; a 6-digit code arrives by mail. New to WAT Rooms? You'll also be asked for the [signup code](/account).
-2. **Consent** — approve what the connection may do (see rooms and bookings; create, edit, and cancel bookings on your behalf).
+1. **Email code:** enter your email; a 6-digit code arrives by mail. New to WAT Rooms? You'll also be asked for the [signup code](/account).
+2. **Consent:** approve what the connection may do (see rooms and bookings; create, edit, and cancel bookings on your behalf).
 
 That's it. The connection acts as **you**: bookings it makes are your bookings, with your daily budget, and it can only edit or cancel your own. Access expires and renews automatically; deactivated members lose access immediately.
 
@@ -40,7 +40,7 @@ That's it. The connection acts as **you**: bookings it makes are your bookings, 
 | `list_rooms` | The bookable rooms (name, capacity, description) |
 | `check_availability` | Free time ranges for one room over a window |
 | `list_bookings` | Bookings, filterable (`mine`, room, time window) |
-| `create_booking` | Book a room — your agent confirms with you first |
+| `create_booking` | Book a room (your agent confirms with you first) |
 | `edit_booking` | Reschedule or retitle your booking before it starts |
 | `cancel_booking` | Cancel your booking (frees the slot) |
 | `get_me` | Who the connection acts as |
@@ -60,4 +60,4 @@ The server enforces the same [booking rules](/booking-rules) as everywhere else:
 | Works in | claude.ai, Claude Desktop, Claude Code, Cursor… | terminals + agents with shell access |
 | Best for | chat-first booking anywhere | scripting and shell-native agents |
 
-Same account, same API, same rules — pick whichever fits the moment.
+Same account, same API, same rules: pick whichever fits the moment.
