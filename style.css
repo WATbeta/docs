@@ -2,19 +2,21 @@
  *
  * Palette from the Iconic Group site: dune-mist #f0ebe6 (warm paper),
  * charcoal-espresso #1a1412 (warm ink), blueprint-blue #b4c8dc (accent).
- * Primary / accent live in docs.json `colors`; the page background lives in
- * docs.json `background.color` (#FCFBF9 light / #1A1412 dark).
+ * Primary / accent live in docs.json `colors`.
  *
- * The sidebar gets the deeper paper tone #f7f6f2 (rgb 247 246 242) so it
- * reads as a distinct surface against the lighter page background.
- * NOTE: the Mintlify DOM names the sidebar container `#sidebar-content`
- * (there is no `#sidebar`); keep selectors in sync with the live DOM.
+ * Almond-theme layering: docs.json `background.color` paints the CONTENT
+ * CARD (#content-container uses bg-background-light/dark), while the chrome
+ * around it — navbar, sidebar, gutters — is a fixed full-viewport layer
+ * `#almond-background-color` (default: 3% gray tint). We override that layer
+ * with the deeper paper tone so the whole frame reads as one warm surface
+ * and the content card stays white. The sidebar itself stays transparent.
+ * NOTE: keep selectors in sync with the live Mintlify DOM.
  */
 
-#sidebar-content {
+#almond-background-color {
   background-color: #f7f6f2;
 }
 
-.dark #sidebar-content {
-  background-color: #1a1412;
+.dark #almond-background-color {
+  background-color: #120e0c;
 }
