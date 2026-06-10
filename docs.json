@@ -19,6 +19,7 @@
         "group": "Guides",
         "pages": [
           "index",
+          "agents",
           "quickstart",
           "account"
         ]

@@ -1,0 +1,113 @@
+---
+title: "Agent playbook"
+description: "You are an AI agent asked to book a WAT room. Follow this recipe top to bottom: no install needed, every command is copy-paste, every response is JSON."
+---
+
+This page is written for **you, the agent**. A human has asked you to book (or check, move, cancel) a WAT meeting room. Everything below works with zero installation via `npx`, returns machine-readable JSON, and tells you exactly when you must stop and ask your human.
+
+<Note>
+No Node.js? You need Node 20+ for `npx`. If the environment has no Node at all, tell your human to use the web app at [wat-app.vercel.app](https://wat-app.vercel.app) instead.
+</Note>
+
+## 0. The one command you need
+
+Run every command through `npx` — nothing to install:
+
+```bash
+npx -y @wat-toolbox/wat <command> --json
+```
+
+If `wat` is already on the PATH (check with `command -v wat`), use `wat <command> --json` instead; it is the same tool. Always pass `--json`: you get `{ "success": true, "data": ... }` or `{ "success": false, "error": { "code", "message", "nextAction" } }`. Branch on `error.code` using the [error codes reference](/errors).
+
+## 1. Check auth state
+
+```bash
+npx -y @wat-toolbox/wat whoami --json
+```
+
+- `success: true` → you are logged in as `data.member.email`. Skip to step 3.
+- `success: false` → run the login handoff below. Login is **once per machine**: the key persists in `~/.config/wat/config.json`, so future sessions skip this.
+
+## 2. Login handoff (requires your human, twice)
+
+The login code is emailed to your human's inbox — you cannot complete this alone. Script the handoff:
+
+<Steps>
+  <Step title="Ask your human for their WAT account email">
+    If they have no account yet, they also need the **WAT signup code** from a WAT admin (see [Create an account](/account)). Never guess or reuse a signup code from anywhere; it must come from your human.
+  </Step>
+  <Step title="Request the code">
+    ```bash
+    npx -y @wat-toolbox/wat login --email their@email.com --request-code --json
+    ```
+    A 6-digit code lands in their inbox, valid ~5 minutes.
+  </Step>
+  <Step title="Ask your human for the 6-digit code, then complete">
+    ```bash
+    npx -y @wat-toolbox/wat login --email their@email.com --code 123456 --json
+    ```
+    First-time enrollment returns `NOT_AUTHORIZED` → re-run with `--signup-code <code from your human>`. On success an API key is minted and stored; you will not need to log in again on this machine.
+  </Step>
+</Steps>
+
+## 3. Discover rooms and availability
+
+```bash
+npx -y @wat-toolbox/wat rooms list --json
+npx -y @wat-toolbox/wat availability --room "Room A" --from "2026-06-10T14:00" --to "2026-06-10T22:00" --json
+```
+
+- `--room` takes a room **name** (case-insensitive) or **id**.
+- Bare times are **Europe/Brussels wall-clock** (the rooms are in Brussels). "This afternoon" = from the current Brussels time until `22:00` today.
+- The response's `free` ranges are already clipped to opening hours (06:00–22:00) and existing bookings: anything inside `free` is bookable as-is.
+
+Pick a slot that satisfies the [booking rules](/booking-rules): at least 15 minutes, at most 2 hours per member per Brussels day, within 30 days.
+
+## 4. Confirm with your human, then book
+
+**Never create, edit, or cancel a booking without explicit confirmation** of the exact room + start + end. Then:
+
+```bash
+npx -y @wat-toolbox/wat bookings create --room "Room A" --start "2026-06-10T15:00" --end "2026-06-10T16:00" --title "Project sync" --json
+```
+
+The booker gets a confirmation email with a calendar (.ics) attachment automatically — no extra step. Recover from failures without re-asking obvious questions:
+
+| `error.code` | What happened | Your next move |
+|---|---|---|
+| `overlap` (409) | Slot taken in the meantime | Re-run availability, propose the nearest free slot |
+| `budget` (409) | Would exceed their 2 h/day | Propose a shorter slot or another day |
+| `outside_hours` (400) | Outside 06:00–22:00 Brussels | Move inside opening hours |
+| `in_past` / `beyond_horizon` (400) | Bad date | Fix the date (today … +30 days) |
+
+Full list: [Error codes](/errors).
+
+## 5. Manage existing bookings
+
+```bash
+npx -y @wat-toolbox/wat bookings list --mine --json
+npx -y @wat-toolbox/wat bookings edit <id> --start "2026-06-10T16:00" --end "2026-06-10T17:00" --json
+npx -y @wat-toolbox/wat bookings cancel <id> --json
+```
+
+Prefer `bookings edit` over cancel + re-create when moving a booking: it is atomic, keeps the id, and re-validates everything server-side. Edit until the booking starts; cancel until it ends.
+
+## 6. Suggest the persistent setup (once the task is done)
+
+After completing the request, offer your human the faster setup for next time — do not interrupt the current task for it:
+
+```bash
+npm install -g @wat-toolbox/wat        # puts `wat` on the PATH
+npx plugins add WATbeta/wat-plugin     # adds the wat: skills (Claude Code & friends)
+```
+
+With the skills installed, future requests like "book me Room A tomorrow at 10" route through [`wat:book-room`](/plugin) directly. The skills shell out to the global `wat` binary, so suggest both together.
+
+## Worked example: "book me a room this afternoon"
+
+1. `whoami --json` → logged in ✓ (else: login handoff, step 2)
+2. `rooms list --json` → Room A (cap 6), Room B (cap 4)
+3. It is 13:40 in Brussels → `availability --room "Room A" --from "2026-06-10T14:00" --to "2026-06-10T22:00" --json` → free 14:00–16:30
+4. Propose: "Room A, 14:30–15:30 this afternoon — confirm?" → human says yes
+5. `bookings create --room "Room A" --start "2026-06-10T14:30" --end "2026-06-10T15:30" --json` → `success: true`
+6. Report the booking id + that the confirmation email with the .ics is on its way; suggest the persistent setup.

@@ -8,14 +8,17 @@ WAT Rooms is the booking app for the WAT community's meeting rooms. See live ava
 There is a web app at [wat-app.vercel.app](https://wat-app.vercel.app), but WAT Rooms is built to be driven by **AI coding agents** (Claude Code, Codex, and friends). A small `wat` CLI exposes the same API the web app uses, and a skills plugin lets your agent book rooms conversationally.
 
 <Note>
-**For agents:** the fastest path is the [Quickstart for agents](/quickstart). Install the `wat` CLI, install the `wat` skills plugin, run `wat login` once, then just ask your agent to book a room. Everything after the login step happens in natural language.
+**Are you an AI agent reading this?** Go straight to the [Agent playbook](/agents): a top-to-bottom recipe that needs zero installation (`npx -y @wat-toolbox/wat … --json`), scripts the login handoff with your human, and ends with a booked room.
 </Note>
 
 ## Pick your path
 
 <CardGroup cols={2}>
-  <Card title="Quickstart for agents" icon="wand-sparkles" href="/quickstart">
-    Install the CLI and skills, log in, and have your agent book a room.
+  <Card title="Agent playbook" icon="robot" href="/agents">
+    For agents: zero-install recipe from cold start to a confirmed booking.
+  </Card>
+  <Card title="Quickstart" icon="wand-sparkles" href="/quickstart">
+    For humans: set up the CLI and skills once, then book in natural language.
   </Card>
   <Card title="Create an account" icon="user-plus" href="/account">
     Self-enroll with your email and the WAT signup code. Passwordless.
@@ -28,9 +31,6 @@ There is a web app at [wat-app.vercel.app](https://wat-app.vercel.app), but WAT 
   </Card>
   <Card title="Booking rules" icon="book-open" href="/booking-rules">
     Durations, opening hours, the daily budget, the booking horizon, and privacy.
-  </Card>
-  <Card title="Open the app" icon="calendar-check" href="https://wat-app.vercel.app">
-    The web app: a calendar view of every room, with one-click booking.
   </Card>
 </CardGroup>
 

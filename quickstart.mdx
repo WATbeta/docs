@@ -3,7 +3,11 @@ title: "Quickstart for agents"
 description: "Install the wat CLI and skills, log in once, then ask your agent to book a room."
 ---
 
-This is the fast path. In four steps you give an AI coding agent (Claude Code, Codex, …) the ability to book WAT rooms for you in plain language.
+This is the fast path **for humans**: in four steps you give an AI coding agent (Claude Code, Codex, …) the ability to book WAT rooms for you in plain language.
+
+<Note>
+**Are you the agent?** You don't need any of this setup — follow the [Agent playbook](/agents) instead: it works immediately via `npx`, with no global install and no skills.
+</Note>
 
 <Note>
 **Prerequisites:** Node.js 20 or higher, and a WAT account. No account yet? See [Create an account](/account). First-time login also needs the **WAT signup code** (ask a WAT admin for it).
@@ -66,14 +70,13 @@ This is the fast path. In four steps you give an AI coding agent (Claude Code, C
 
 ## Hand this to your agent
 
-Paste this into your agent to set everything up in one go:
+Don't want to run the steps yourself? Paste this into your agent and let it do everything (it will ask you for the email code, and the signup code if it's your first login):
 
 ```text
-Read https://wat-887510d5.mintlify.app (the WAT Rooms docs), then:
-1. Install the wat CLI: npm install -g @wat-toolbox/wat
-2. Install the skills: npx plugins add WATbeta/wat-plugin
-3. Run `wat login` (I'll enter the email code and, if asked, the WAT signup code).
-4. Book me Room A tomorrow from 10:00 to 11:00.
+Read https://wat-887510d5.mintlify.app/agents (the WAT Rooms agent playbook)
+and follow it. My email is <your email>. Book me Room A tomorrow from 10:00
+to 11:00, and once that's done, set up the persistent CLI + skills install
+for next time.
 ```
 
 <Note>
