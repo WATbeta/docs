@@ -14,7 +14,7 @@
       "dark": "#1A1412"
     }
   },
-  "favicon": "/favicon.ico",
+  "favicon": "/favicon.png",
   "logo": {
     "light": "/logo/light.svg",
     "dark": "/logo/dark.svg"

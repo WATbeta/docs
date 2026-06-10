@@ -14,7 +14,7 @@ This is the fast path **for humans**: in four steps you give an AI coding agent 
 </Note>
 
 <Note>
-**Prerequisites:** Node.js 20 or higher, and a WAT account. No account yet? See [Create an account](/account). First-time login also needs the **WAT signup code** (ask a WAT admin for it).
+**Prerequisites:** Node.js 20 or higher, and a WAT account. No account yet? Your first login creates one automatically if your **company email** is on WAT's resident list — see [Create an account](/account).
 </Note>
 
 <Steps>
@@ -50,7 +50,7 @@ This is the fast path **for humans**: in four steps you give an AI coding agent 
   </Step>
 
   <Step title="Log in">
-    Run `wat login` once. It sends a 6-digit code to your email, and on your **first** login also asks for the WAT signup code.
+    Run `wat login` once. It sends a 6-digit code to your email; entering it both logs you in and (on your **first** login with a resident-list email) creates your account.
 
     ```bash
     wat login
@@ -74,7 +74,7 @@ This is the fast path **for humans**: in four steps you give an AI coding agent 
 
 ## Hand this to your agent
 
-Don't want to run the steps yourself? Paste this into your agent and let it do everything (it will ask you for the email code, and the signup code if it's your first login):
+Don't want to run the steps yourself? Paste this into your agent and let it do everything (it will ask you for the email code):
 
 ```text
 Read https://docs.wat.com/agents (the WAT Rooms agent playbook)
@@ -84,7 +84,7 @@ for next time.
 ```
 
 <Note>
-The signup code is a secret: an admin gives it to you, you type it into `wat login` once. Never paste it into a shared prompt or commit it.
+Use your company email: sign-up is automatic for resident company domains. If login is refused with `NOT_AUTHORIZED`, ask a WAT admin to add your email or company domain to the list.
 </Note>
 
 ## What's next

@@ -38,7 +38,7 @@ The login code is emailed to your human's inbox — you cannot complete this alo
 
 <Steps>
   <Step title="Ask your human for their WAT account email">
-    If they have no account yet, they also need the **WAT signup code** from a WAT admin (see [Create an account](/account)). Never guess or reuse a signup code from anywhere; it must come from your human.
+    Their **company email** is best: first-time enrollment is automatic when the email's domain is on WAT's resident list (see [Create an account](/account)). A personal address works only if a WAT admin has added it individually.
   </Step>
   <Step title="Request the code">
     ```bash
@@ -50,7 +50,7 @@ The login code is emailed to your human's inbox — you cannot complete this alo
     ```bash
     npx -y @wat-toolbox/wat login --email their@email.com --code 123456 --json
     ```
-    First-time enrollment returns `NOT_AUTHORIZED` → re-run with `--signup-code <code from your human>`. On success an API key is minted and stored; you will not need to log in again on this machine.
+    If the email isn't on WAT's resident list, this returns `NOT_AUTHORIZED` — relay the message to your human: a WAT admin must add their email or company domain (web app, **Admin → Access**), then retry from step 2. On success an API key is minted and stored; you will not need to log in again on this machine.
   </Step>
 </Steps>
 

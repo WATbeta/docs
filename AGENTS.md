@@ -12,7 +12,7 @@ The CLI and the skills are the source of truth for commands and flags. When they
 
 ## Hard rules
 
-- **Never put the WAT signup code value in the docs.** It is secret. Say "ask a WAT admin for it".
+- **Enrollment is allowlist-gated, not code-gated.** First login self-enrolls when the email's domain (or the exact address) is on the admin-managed resident list (web app, Admin → Access). Never document a signup code — that mechanism was removed in 2026-06; say "ask a WAT admin to add your email or company domain".
 - The CLI is published to npm as `@wat-toolbox/wat`. Document install as `npm install -g @wat-toolbox/wat` (global, needed for the skills plugin which calls `wat`) or `npx @wat-toolbox/wat …` for one-off commands. Do NOT document a clone/build/link from-source flow.
 - Do not document the staging URL as a user URL; reference it only via `--env dev`.
 

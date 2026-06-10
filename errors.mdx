@@ -29,6 +29,8 @@ The web app, the [`wat` CLI](/cli), and the [skills plugin](/plugin) all hit the
 |---|---|---|---|
 | 401 | `unauthenticated` | No API key, or the key is invalid or revoked. | Run `wat login`, or pass a valid key via `--api-key` / `WAT_CLI_API_KEY`. |
 | 403 | `permission-denied` | The key is valid but the action is not allowed: editing or cancelling someone else's booking, an admin-only action (maintenance blocks, `rooms list --all`), or no active member behind the key. | Stop and tell the user; only the booking's owner or an admin can do this. |
+| 401 | `INVALID_OTP` | The 6-digit login code is wrong or expired (`wat login`). | Request a fresh code with `--request-code` and retry. |
+| 403 | `NOT_AUTHORIZED` | Login completed the email code, but the email may not enroll: it is not on WAT's resident list (or the account is deactivated). | Ask a WAT admin to add your email or company domain (web app, **Admin → Access**), then log in again. |
 
 When the server returns an error without a code of its own, the CLI derives one from the HTTP status: `unauthenticated` (401), `permission-denied` (403), `not-found` (404), `conflict` (409), `validation` (422), `internal` (5xx), and `network-error` when no response arrived at all.
 
@@ -41,4 +43,4 @@ These never reach the server: the CLI fails fast locally and exits non-zero.
 | `ROOM_NOT_FOUND` | No active room matches the `--room` name or id. | Run `wat rooms list` and use an exact name or the room id. |
 | `AMBIGUOUS_ROOM` | More than one room shares that name. | Pass the room id instead of the name. |
 | `INVALID_TIME` | A `--start`, `--end`, `--from`, or `--to` value failed to parse. | Use an ISO-style value such as `2026-06-10T10:00`, optionally with `--tz` or an explicit offset. |
-| `MISSING_FLAG` | `wat login --json` needs a flag it did not get (it never prompts in JSON mode). | Pass the missing flag: `--email`, `--code`, or `--signup-code` on first enrollment. |
+| `MISSING_FLAG` | `wat login --json` needs a flag it did not get (it never prompts in JSON mode). | Pass the missing flag: `--email`, or `--code` after a `--request-code` send. |

@@ -30,7 +30,7 @@ The [skills plugin](/plugin) shells out to `wat`, so the skills require the glob
 wat login
 ```
 
-This runs an email one-time-password flow: it sends a 6-digit code to your email and prompts for it. On your **first** login it also asks for the WAT signup code (ask a WAT admin for it). It then mints an API key and stores it as your active profile in `~/.config/wat/config.json` (mode 0600). Every later command reuses this key.
+This runs an email one-time-password flow: it sends a 6-digit code to your email and prompts for it. On your **first** login your account is created automatically if your email is on WAT's resident list (your company's domain, or your address added by a WAT admin) — otherwise login fails with `NOT_AUTHORIZED` and you should ask a WAT admin to add you. It then mints an API key and stores it as your active profile in `~/.config/wat/config.json` (mode 0600). Every later command reuses this key.
 
 ```bash
 wat whoami    # confirm who you're logged in as, and your role
@@ -58,7 +58,6 @@ Do not skip step 1: each send invalidates earlier codes, so completing must not 
 | `--email <email>` | The account email (otherwise prompted). |
 | `--request-code` | Send the login code and exit; complete later with `--code`. |
 | `--code <code>` | The 6-digit code from the login email; skips the send + prompt. |
-| `--signup-code <code>` | The WAT signup code, required on first enrollment only. |
 | `--profile-name <name>` | Name for the local profile (auto-derived if omitted). |
 | `--key-name <name>` | Human-readable name for the minted API key. |
 
