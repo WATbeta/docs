@@ -2,22 +2,19 @@
  *
  * Palette from the Iconic Group site: dune-mist #f0ebe6 (warm paper),
  * charcoal-espresso #1a1412 (warm ink), blueprint-blue #b4c8dc (accent).
- * Primary / accent live in docs.json `colors`.
+ * Primary / accent live in docs.json `colors`; the page background lives in
+ * docs.json `background.color` (#FCFBF9 light / #1A1412 dark).
  *
- * Soft warm tone (#f7f6f2 = rgb 247 246 242) on the page + sidebar; the content
- * area is left untouched (no tinted rectangle behind the docs).
+ * The sidebar gets the deeper paper tone #f7f6f2 (rgb 247 246 242) so it
+ * reads as a distinct surface against the lighter page background.
+ * NOTE: the Mintlify DOM names the sidebar container `#sidebar-content`
+ * (there is no `#sidebar`); keep selectors in sync with the live DOM.
  */
 
-/* Light mode: warm page + sidebar surface. */
-body:not(.dark) {
-  background-color: #f7f6f2;
-}
-body:not(.dark) #sidebar,
-body:not(.dark) nav#sidebar {
+#sidebar-content {
   background-color: #f7f6f2;
 }
 
-/* Dark mode: warm charcoal instead of a cold black. */
-.dark body {
-  background-color: #17120f;
+.dark #sidebar-content {
+  background-color: #1a1412;
 }
