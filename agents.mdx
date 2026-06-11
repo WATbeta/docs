@@ -72,7 +72,7 @@ Pick a slot that satisfies the [booking rules](/booking-rules): at least 15 minu
 **Never create, edit, or cancel a booking without explicit confirmation** of the exact room + start + end. Then:
 
 ```bash
-npx -y @wat-toolbox/wat bookings create --room "Room A" --start "2026-06-10T15:00" --end "2026-06-10T16:00" --title "Project sync" --json
+npx -y @wat-toolbox/wat bookings create --room "Room A" --start "2026-06-10T15:00" --end "2026-06-10T16:00" --title "Project sync" --guests "guest@client.com" --json
 ```
 
 The booker gets a confirmation email with a calendar (.ics) attachment automatically — no extra step. Recover from failures without re-asking obvious questions:

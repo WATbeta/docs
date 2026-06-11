@@ -16,23 +16,34 @@ The same rules apply whether you book in the web app, the CLI, or through an age
 | Opening hours | Between **06:00 and 22:00** Europe/Brussels, within a single day. Applies when you create or edit a booking; bookings made before this rule existed stay valid, and admin maintenance blocks are exempt. |
 | Edit | Change your own booking until it starts. |
 | Cancel | Cancel your own booking until it ends, so an in-progress booking you no longer need frees the room. |
-| Privacy | Others see your **name** on a booking, never its **title**. Only you and admins see the title. |
+| Privacy | Others see your **name** on a booking, never its **title**. Only you and admins see the title and the guest list. |
+| Guests | Invite up to **10 people by email** when you book — any address works, guests don't need a WAT account. They get the invitation, the reminder, and any updates or cancellations. |
 
 <Note>
 The daily budget counts only your **active** bookings. Cancel one and that time frees up again for the day.
 </Note>
 
+## Inviting guests
+
+Add guest email addresses when you create (or edit) a booking — in the web app's booking panel, with the CLI's `--guests` flag, or through an agent. Guests don't need a WAT account: any email address works.
+
+- Each guest receives an **invitation email** with a calendar invite (`.ics`), worded for them ("<booker> invited you"), plus the **reminder** before the meeting and any **update or cancellation** emails.
+- Editing the guest list later invites the newcomers and sends removed guests a cancellation of their invite (their calendar entry clears, nobody else's does).
+- The guest list is visible only to you and admins, like the title.
+- Limit: 10 guests per booking.
+
 ## Email notifications
 
-| Email | When | Includes |
-|---|---|---|
-| Login code | Each time you log in | The 6-digit one-time code |
-| Booking confirmation | When you create a booking | A calendar invite (`.ics`) so you can add it to your own calendar |
-| Cancellation notice | When a booking is cancelled, including by an admin | The cancelled booking's details |
-| Update notice | When an admin moves your booking | The new time |
-| Reminder | Shortly before the booking starts | The upcoming booking's details |
+| Email | Who | When | Includes |
+|---|---|---|---|
+| Login code | You | Each time you log in | The 6-digit one-time code |
+| Booking confirmation | You | When you create a booking | A calendar invite (`.ics`) so you can add it to your own calendar, plus the guest list |
+| Guest invitation | Your guests | When you book (or add them later) | "<booker> invited you" with the same calendar invite |
+| Cancellation notice | You + your guests | When a booking is cancelled, including by an admin | The cancelled booking's details + a calendar cancellation |
+| Update notice | You + your guests | When the time or room changes | The new time |
+| Reminder | You + your guests | Shortly before the booking starts | The upcoming booking's details |
 
-You control confirmation emails, reminder emails, and how far ahead the reminder arrives on the **Notifications** tab of the **Account** page in the web app. The **API keys** tab on the same page manages the keys your CLI and agents use.
+You control **your own** confirmation and reminder emails (and the reminder lead time) on the **Notifications** tab of the **Account** page in the web app — guests always receive theirs. The **API keys** tab on the same page manages the keys your CLI and agents use.
 
 ## Admins
 

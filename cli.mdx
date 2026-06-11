@@ -93,9 +93,17 @@ wat bookings list --room "Room A" --from 2026-06-10 --to 2026-06-11
 # Create a booking (title is optional; only you + admins see it)
 wat bookings create --room "Room A" --start "2026-06-10T10:00" --end "2026-06-10T11:00" --title "Sync"
 
+# Invite guests (comma-separated emails, max 10, any address) — they get the
+# invitation + reminder emails
+wat bookings create --room "Room A" --start "2026-06-10T10:00" --end "2026-06-10T11:00" \
+  --guests "guest@client.com,partner@firm.be"
+
 # Edit your own booking before it starts (pass any subset of flags)
 wat bookings edit <id> --start "2026-06-10T11:00" --end "2026-06-10T12:00"
 wat bookings edit <id> --room "Room B" --title "Moved sync"
+
+# Replace the guest list (full replacement; --guests "" removes everyone)
+wat bookings edit <id> --guests "guest@client.com,newcomer@startup.io"
 
 # Cancel a booking by id
 wat bookings cancel <id>
