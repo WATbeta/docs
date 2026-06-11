@@ -11,7 +11,7 @@ The same rules apply whether you book in the web app, the CLI, or through an age
 |---|---|
 | Time model | Book any free time range, in 15-minute steps. |
 | Minimum duration | 15 minutes. |
-| Daily budget | Up to **2 hours** of booking per person per Brussels calendar day. |
+| Daily budget | Up to **2 hours** of booking per person per Brussels calendar day. Admins are exempt. |
 | Booking horizon | Up to **30 days** ahead, never in the past. |
 | Opening hours | Between **06:00 and 22:00** Europe/Brussels, within a single day. Applies when you create or edit a booking; bookings made before this rule existed stay valid, and admin maintenance blocks are exempt. |
 | Edit | Change your own booking until it starts. |
@@ -36,4 +36,6 @@ You control confirmation emails, reminder emails, and how far ahead the reminder
 
 ## Admins
 
-WAT admins manage everything in the web app: they create, edit, and archive rooms, block rooms (these show as "Unavailable" on the calendar), view or cancel any booking, and manage members. Admin blocks take priority: if a block covers a time you had booked, your booking is cancelled automatically — it moves to your cancelled list and you receive an email asking you to reschedule. Blocks are exempt from the daily budget. Most members never need the admin area.
+WAT admins manage everything in the web app: they create, edit, and archive rooms, block rooms (these show as "Unavailable" on the calendar), view or cancel any booking, and manage members. Admin blocks take priority: if a block covers a time you had booked, your booking is cancelled automatically — it moves to your cancelled list and you receive an email asking you to reschedule. Blocks are exempt from the daily budget, and admins are exempt from it on their own bookings too. Most members never need the admin area.
+
+Admins can also set **recurring blocks**: a standing weekly unavailability on a room (for example, every Monday 12:00–20:00). These show as "Unavailable" on the calendar like any other block, week after week, until an admin removes the rule. The same priority applies: bookings inside an upcoming recurring window are cancelled automatically and their owners emailed.
