@@ -19,6 +19,8 @@ The web app, the [`wat` CLI](/cli), and the [skills plugin](/plugin) all hit the
 | `beyond_horizon` | 400 | The booking starts more than 30 days ahead. | Pick a date within the 30-day [booking horizon](/booking-rules). |
 | `outside_hours` | 400 | The booking falls outside the opening hours (06:00 to 22:00 Europe/Brussels), or crosses midnight. | Move the booking inside opening hours, on a single Brussels day. |
 | `title_too_long` | 422 | The title exceeds 200 characters. | Shorten the title (it is optional, you can drop it). |
+| `invalid_guests` | 422 | A guest entry is not a valid email address (the message names it), or guests were passed on a maintenance block. | Fix or remove the flagged address and retry. |
+| `too_many_guests` | 422 | More than 10 guests on one booking. | Trim the guest list to 10 or fewer. |
 | `overlap` | 409 | The slot was taken between your availability check and the booking. | Re-check availability and pick another free slot. |
 | `budget` | 409 | The booking would push you past the 2-hour daily budget on some Brussels day. | Shorten the booking, move it to another day, or cancel one of your other bookings that day. |
 | `check` | 422 | The database's own constraints rejected the times (the backstop behind `invalid_range`). | Treat like `invalid_range`: fix the start and end times. |
