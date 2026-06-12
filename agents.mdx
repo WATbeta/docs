@@ -50,7 +50,7 @@ The login code is emailed to your human's inbox — you cannot complete this alo
     ```bash
     npx -y @wat-toolbox/wat login --email their@email.com --code 123456 --json
     ```
-    If the email isn't on WAT's resident list, this returns `NOT_AUTHORIZED` — relay the message to your human: a WAT admin must add their email or company domain (web app, **Admin → Access**), then retry from step 2. On success an API key is minted and stored; you will not need to log in again on this machine.
+    If the email isn't on WAT's resident list, this returns `NOT_AUTHORIZED` and an access request is automatically filed with the WAT admins — relay the message to your human: they'll receive a "you've been accepted" email once an admin approves it, then retry from step 2. On success an API key is minted and stored; you will not need to log in again on this machine.
   </Step>
 </Steps>
 

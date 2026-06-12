@@ -30,7 +30,7 @@ The [skills plugin](/plugin) shells out to `wat`, so the skills require the glob
 wat login
 ```
 
-This runs an email one-time-password flow: it sends a 6-digit code to your email and prompts for it. On your **first** login your account is created automatically if your email is on WAT's resident list (your company's domain, or your address added by a WAT admin) — otherwise login fails with `NOT_AUTHORIZED` and you should ask a WAT admin to add you. It then mints an API key and stores it as your active profile in `~/.config/wat/config.json` (mode 0600). Every later command reuses this key.
+This runs an email one-time-password flow: it sends a 6-digit code to your email and prompts for it. On your **first** login your account is created automatically if your email is on WAT's resident list (your company's domain, or your address added by a WAT admin) — otherwise login fails with `NOT_AUTHORIZED` and an **access request** is automatically filed with the WAT admins: you'll receive an email if it's approved, then log in again. It then mints an API key and stores it as your active profile in `~/.config/wat/config.json` (mode 0600). Every later command reuses this key.
 
 ```bash
 wat whoami    # confirm who you're logged in as, and your role
